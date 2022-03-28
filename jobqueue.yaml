@@ -1,39 +1,41 @@
 distributed:
-    dashboard:
-        link: "/proxy/{port}/status"
-    worker:
-        memory:
-            target: 0.90  # Avoid spilling to disk
-            spill: False  # Avoid spilling to disk
-            pause: 0.90  # fraction at which we pause worker threads
-            terminate: 0.95  # fraction at which we terminate the worker
+  dashboard:
+    link: "/proxy/{port}/status"
+  scheduler:
+    bandwidth: 1000000000     # GB MB/s estimated worker-worker bandwidth
+  worker:
+    memory:
+      target: 0.90  # Avoid spilling to disk
+      spill: False  # Avoid spilling to disk
+      pause: 0.90  # fraction at which we pause worker threads
+      terminate: 0.95  # fraction at which we terminate the worker
+  comm:
+    compression: null
 
-# NOTE: change these if you like. Some info: http://jobqueue.dask.org/en/latest/configuration.html
-# jobqueue:
-#   slurm:
-#     name: dask-worker
+jobqueue:
+   slurm:
+     name: dask-worker
 
-#     # Dask worker options
-#     cores: null                 # Total number of cores per job
-#     memory: null                # Total amount of memory per job
-#     processes: null                # Number of Python processes per job
+     # Dask worker options
+     cores: 4                # Total number of cores per job
+     memory: "10 GB"                # Total amount of memory per job
+     processes: 1                # Number of Python processes per job
+     allowed-failures: 3 
+#    interface: ib0            #use for g partition 
+#     interface: lo           #use for h partition
+     death-timeout: 60           # Number of seconds to wait if a worker can not find a scheduler
+     local-directory:  /data/keeling/a/YOUR-USER-ID/tmp/       # Location of fast local storage like /scratch or $TMPDIR
 
-#     interface: null             # Network interface to use like eth0 or ib0
-#     death-timeout: 60           # Number of seconds to wait if a worker can not find a scheduler
-#     local-directory: null       # Location of fast local storage like /scratch or $TMPDIR
-#     shared-temp-directory: null       # Shared directory currently used to dump temporary security objects for workers
-#     extra: []
+     # SLURM resource manager options
+     queue: "seseml" 
+     walltime: '00:30:00'
+     extra: [] 
+     env-extra: []
+     job-cpu: null
+     job-mem: null
+#     job-extra: {'-C g20'}    #use for g partition
+#     job-extra: {'--ntasks-per-node=1'}
+#     job-extra: {'-C g256'}    #use for g partition-large memory nodes
+#     job-extra: {'-C h20'}   #use for h partition
+     log-directory: /data/keeling/a/YOUR-USER-ID/dask/
 
-#     # SLURM resource manager options
-#     shebang: "#!/usr/bin/env bash"
-#     queue: null
-#     project: null
-#     walltime: '00:30:00'
-#     env-extra: []
-#     job-cpu: null
-#     job-mem: null
-#     job-extra: []
-#     log-directory: null
-    
-#     # Scheduler options
-#     scheduler-options: {}
