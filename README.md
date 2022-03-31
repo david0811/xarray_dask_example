@@ -16,4 +16,4 @@ Then, run the following comands to create and activate a new conda environment t
 
 ## Dask setup
 1. Copy the `jobqueue.yaml` file in this repository into `$HOME/.config/dask/` on keeling and change `YOUR-USER-ID` where appropriate.
-2. Follow the steps in either the FWI or degree days notebook to create the cluster. Make sure to specify the scheduler options as follows: `cluster = SLURMCluster(scheduler_options={'host': '172.22.179.3:7065'})` where the last 4 numbers are something else between 7000-8000. Also, the notebook from which you initialize the cluster must be run from a head node! A compute node will not work.
+2. Follow the steps in either the FWI or DegreeDays notebook to create the cluster. Make sure to specify the scheduler options as follows: `cluster = SLURMCluster(scheduler_options={'host': '172.22.179.3:XXXX'})` where the last 4 numbers are between 7000-8000. Also, the notebook from which you initialize the cluster must be run from a head node! A compute node will not work.
