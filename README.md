@@ -13,7 +13,6 @@ Then, run the following comands to create and activate a new conda environment t
 1. `conda create --name climate_stack`
 2. `conda activate climate_stack`
 3. `conda install -c conda-forge xarray bottleneck cartopy dask distributed geopandas xagg netCDF4 seaborn nodejs jupyterlab cartopy cftime nc-time-axis dask-jobqueue xclim dask-labextension`
-4. `conda activate climate_stack`
 
 ## Dask setup
 1. Copy the `jobqueue.yaml` file in this repository into `$HOME/.config/dask/` on keeling and change `YOUR-USER-ID` where appropriate.
