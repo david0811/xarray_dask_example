@@ -1,0 +1,37 @@
+jobqueue:
+    pbs:
+        name: dask-worker
+
+        # Dask worker options
+        cores: 4                 # Total number of cores per job 
+        memory: '10 GB'                # Total amount of memory per job
+        processes: 1                # Number of Python processes per job
+
+        interface: null             # Network interface to use like eth0 or ib0
+        death-timeout: 60           # Number of seconds to wait if a worker can not find a scheduler
+        local-directory: /gpfs/scratch/YOUR-PSU-ID       # Location of fast local storage like /scratch or $TMPDIR
+        extra: []
+
+        # PBS resource manager options
+        shebang: "#!/usr/bin/env bash"
+        queue: null
+        project: open # may also be 'kaf26_c_g_sc_default' for PCHES queue
+        walltime: '00:30:00'
+        env-extra: []
+        resource-spec: null
+        job-extra: []
+        log-directory: /gpfs/scratch/YOUR-PSU-ID
+    
+        # Scheduler options
+        scheduler-options: {}
+
+distributed:
+    dashboard:
+        #link: "/user/{JUPYTERHUB_USER}/proxy/{port}/status"
+        link: "/proxy/{port}/status"
+    worker:
+        memory:
+            target: False  # Avoid spilling to disk
+            spill: False  # Avoid spilling to disk
+            pause: 0.80  # fraction at which we pause worker threads
+            terminate: 0.95  # fraction at which we terminate the worker
