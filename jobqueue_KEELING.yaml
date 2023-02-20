@@ -8,7 +8,7 @@ distributed:
       target: 0.90  # Avoid spilling to disk
       spill: False  # Avoid spilling to disk
       pause: 0.90  # fraction at which we pause worker threads
-      terminate: 0.95  # fraction at which we terminate the worker
+      terminate: 0.98  # fraction at which we terminate the worker
   comm:
     compression: null
 
@@ -29,8 +29,8 @@ jobqueue:
      # SLURM resource manager options
      queue: "seseml" 
      walltime: '00:30:00'
-     extra: [] 
-     env-extra: []
+     worker_extra_args: [] 
+     job_script_prologue: []
      job-cpu: null
      job-mem: null
 #     job-extra: {'-C g20'}    #use for g partition
