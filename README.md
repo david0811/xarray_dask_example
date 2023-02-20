@@ -11,10 +11,16 @@ For getting started with python, jupyter notebooks, and dask on Keeling, see the
 - [Keeling Crash Course](https://github.com/mgrover1/keeling-crash-course) courtesy of Max Grover
 - [Using dask-distributed on keeling](https://github.com/swnesbitt/dask-keeling/blob/master/using%20dask-distributed%20on%20keeling.ipynb) courtesy of Steve Nesbitt
 
-Then, run the following comands to create and activate a new conda environment to run everything in this repository:
+To create and activate a new conda environment, you can use `conda`:
 1. `conda create --name climate_stack`
 2. `conda activate climate_stack`
-3. `conda install -c conda-forge xarray bottleneck cartopy dask distributed geopandas xagg netCDF4 seaborn nodejs jupyterlab cartopy cftime nc-time-axis dask-jobqueue xclim dask-labextension`
+3. `conda install -c conda-forge xarray bottleneck cartopy dask distributed netCDF4 rioxarray nodejs jupyterlab cftime nc-time-axis dask-jobqueue xclim dask-labextension scipy zarr rasterio matplotlib pint`
+
+but `mamba` will be much faster:
+1. `wget "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"`
+2. `bash Mambaforge-$(uname)-$(uname -m).sh`
+3. `mamba create -n climate-stack-mamba xarray bottleneck cartopy dask distributed netCDF4 rioxarray nodejs jupyterlab cftime nc-time-axis dask-jobqueue xclim dask-labextension scipy zarr rasterio matplotlib pint -c conda-forge`
+4. `mamba activate climate-stack-mamba`
 
 ## Dask setup
 1. Copy the `jobqueue_KEELING.yaml` file in this repository into `$HOME/.config/dask/` on keeling and change `YOUR-USER-ID` where appropriate. Rename the file to `jobqueue.yaml`.
